@@ -72,10 +72,10 @@ def get_multisource_news_array(sources, sort):
 
 def build_url_list(parsed_json):
 	anchor = "<a href={url}>{title}</a>"
-	for article in parsed_json["articles"]:
+	for article in parsed_json:
 		yield anchor.format(
-			url=article["url"],
-			title=article["title"],
+			url=(article["url"]).decode('utf8'),
+			title=(article["title"]).decode('utf8'),
 		)
 
 
@@ -105,7 +105,8 @@ def sql_execute(query, *args, **kwargs):
 def list_articles():
 	lines = None
 	with sql_execute("SELECT * FROM UnsortedArticles") as result:
-		lines = "<br/>".join.join(build_url_list(result))
+		list_of_dicts = [dict((key, value) for key, value in row.items()) for row in result]
+		lines = "<br/>".join(build_url_list(list_of_dicts))
 	return lines
 
 
