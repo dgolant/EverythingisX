@@ -8,10 +8,11 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import coloredlogs
 import logging
 from textblob import TextBlob
+from ast import literal_eval
 
 
 logger = logging.getLogger(__name__)
-coloredlogs.install(level='INFO')
+coloredlogs.install(level='DEBUG')
 
 
 sched = BackgroundScheduler()
@@ -80,15 +81,11 @@ def get_multisource_news_array(sources, sort):
 
 
 def build_url_list(parsed_json):
-    anchor = "<a href={url}>{title}</a>&nbsp{sentiment}"
+    anchor = "<a href={url}>{title}</a>"
     for article in parsed_json:
-        # test code remove soon
-        sentiment = grade_article_titles((article["title"]).decode('utf8'))
-        # to here
         yield anchor.format(
             url=(article["url"]).decode('utf8'),
             title=(article["title"]).decode('utf8'),
-            sentiment=sentiment,
         )
 
 
@@ -116,6 +113,7 @@ def sql_execute(query, *args, **kwargs):
         )
         yield result
     except Exception:
+        print("whoops")
         result.close()
 
 
@@ -140,16 +138,20 @@ def fetch_articles_and_save():
                 ods = ods[:19]
                 dt = datetime.strptime(ods, "%Y-%m-%dT%H:%M:%S")
                 dts = dt.strftime('%Y-%m-%d %H:%M:%S')
+                sentiment_tuple = grade_article_title(article["title"])
                 with sql_execute(
                     """INSERT INTO UnsortedArticles
-                    (author, title, url, imageurl, description, publishtime)
-                    VALUES (%s,%s, %s, %s, %s, %s)""",
+                    (author, title, url, imageurl, sentiment, description, publishtime, polarity, subjectivity)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)""",
                     article["author"],
                     article["title"],
                     article["url"],
                     article["urlToImage"],
+                    sentiment_tuple,
                     article["description"],
-                    dts
+                    dts,
+                    sentiment_tuple['polarity'],
+                    sentiment_tuple['subjectivity'],
                 ):
                     pass
             else:
@@ -167,13 +169,56 @@ def fetch_articles_and_save():
     return "complete"
 
 
-def grade_article_titles(title):
+def grade_article_title(title):
     blob = TextBlob(title)
-    return blob.sentiment
+    sentiment_dict = {
+        "Polarity": blob.sentiment.polarity,
+        "Subjectivity": blob.sentiment.subjectivity,
+    }
+    return sentiment_dict
 
+
+def add_sentiment_to_article_records():
+    with sql_execute(
+            "SELECT *\
+            FROM UnsortedArticles\
+            WHERE Sentiment IS NULL\
+            OR Sentiment = ''"
+        ) as result:
+            list_of_dicts = [
+                dict((key, value) for key, value in row.items())
+                for row in result
+            ]
+    if list_of_dicts:
+        for article in list_of_dicts:
+            if article["sentiment"] is None:
+                article["sentiment"] = grade_article_title(
+                    article["title"].decode('utf8')
+                )
+        for article in list_of_dicts:
+            print("Article Sentiment: {}".format(article['sentiment']))
+            sentiment_string = article['sentiment'].decode('utf8')
+            sentiment_dict = literal_eval(sentiment_string)
+            with sql_execute(
+                "Update UnsortedArticles SET sentiment=\"{}\",\
+                polarity={}, subjectivity={}\
+                WHERE articleID={}\
+                AND(\
+                sentiment IS NULL OR\
+                polarity IS NULL OR\
+                subjectivity IS NULL\
+                )".format(
+                    article['sentiment'].decode('utf8'),
+                    sentiment_dict['Polarity'],
+                    sentiment_dict['Subjectivity'],
+                    article['articleID'],
+                )
+            ):
+                pass
 
 # Seconds can be replaced with minutes, hours, or days
 sched.add_job(fetch_articles_and_save, trigger='cron', day='*', hour='0')
+sched.add_job(add_sentiment_to_article_records, trigger='cron', day='*', hour='0', minute='30')
 sched.start()
 
 
