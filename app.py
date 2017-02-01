@@ -127,6 +127,25 @@ def list_articles():
         lines = "<br/>".join(build_url_list(list_of_dicts))
     return lines
 
+@app.route('/badnews')
+def bad_news():
+    lines = None
+    with sql_execute("SELECT title, url, createdDate, publishtime FROM UnsortedArticles WHERE polarity < 0 GROUP BY title ORDER BY createdDate DESC, publishtime DESC;") as result:
+        list_of_dicts = [
+            dict((key, value) for key, value in row.items()) for row in result
+        ]
+        lines = "<br/>".join(build_url_list(list_of_dicts))
+    return lines
+
+@app.route('/goodnews')
+def good_news():
+    lines = None
+    with sql_execute("SELECT title, url, createdDate, publishtime FROM UnsortedArticles WHERE polarity > 0.0 and subjectivity < 0.5 GROUP BY title ORDER BY createdDate DESC, publishtime DESC;") as result:
+        list_of_dicts = [
+            dict((key, value) for key, value in row.items()) for row in result
+        ]
+        lines = "<br/>".join(build_url_list(list_of_dicts))
+    return lines
 
 def fetch_articles_and_save():
     news_json_array = get_multisource_news_array(newsSources, "top")
