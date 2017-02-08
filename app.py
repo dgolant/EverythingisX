@@ -1,7 +1,9 @@
 import requests
 import simplejson as json
 from flask import Flask
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData, Table
+from sqlalchemy.sql import and_, or_, not_
+from sqlalchemy import text
 from datetime import datetime
 from contextlib import contextmanager
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -9,6 +11,7 @@ import coloredlogs
 import logging
 from textblob import TextBlob
 from ast import literal_eval
+import psycopg2
 
 
 logger = logging.getLogger(__name__)
@@ -47,12 +50,20 @@ newsSources = [
 
 # SQL Connection
 CONNECTION_STRING = (
-    'mysql://' + settings["mysqluser"] + ':' + settings["mysqlpw"] + '@'
-    + settings["mysqllocation"] + '/' + settings["database"] +
-    '?charset=utf8&use_unicode=0'
+    "postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}".format(
+        user=settings['dbuser'],
+        password=settings['dbpw'],
+        host=settings["dbhost"],
+        port=settings['dbport'],
+        db=settings['db'],
+    )
 )
 engine = create_engine(CONNECTION_STRING, pool_recycle=3600)
 connection = engine.connect()
+meta = MetaData(engine)
+articles_table = Table('Articles', meta, autoload=True, autoload_with=engine)
+# from ipdb import set_trace; set_trace()
+# print("-----------------------------META: {}".format(meta))
 
 
 def get_news(source, sort, key):
@@ -120,17 +131,18 @@ def sql_execute(query, *args, **kwargs):
 @app.route('/unsortedlist')
 def list_articles():
     lines = None
-    with sql_execute("SELECT * FROM UnsortedArticles") as result:
+    with sql_execute("SELECT * FROM \"Articles\"") as result:
         list_of_dicts = [
             dict((key, value) for key, value in row.items()) for row in result
         ]
+        # print("list of dicts: {}".format(list_of_dicts))
         lines = "<br/>".join(build_url_list(list_of_dicts))
     return lines
 
 @app.route('/badnews')
 def bad_news():
     lines = None
-    with sql_execute("SELECT title, url, createdDate, publishtime FROM UnsortedArticles WHERE polarity < 0 GROUP BY title ORDER BY createdDate DESC, publishtime DESC;") as result:
+    with sql_execute("SELECT title, url, time_created, publish_time FROM \"Articles\" WHERE polarity < 0 GROUP BY title ORDER BY time_created DESC, publish_time DESC;") as result:
         list_of_dicts = [
             dict((key, value) for key, value in row.items()) for row in result
         ]
@@ -140,7 +152,14 @@ def bad_news():
 @app.route('/goodnews')
 def good_news():
     lines = None
-    with sql_execute("SELECT title, url, createdDate, publishtime FROM UnsortedArticles WHERE polarity > 0.0 and subjectivity < 0.5 GROUP BY title ORDER BY createdDate DESC, publishtime DESC;") as result:
+    query = (
+            "SELECT title, url, time_created, publish_time "
+            "FROM \"Articles\" "
+            "WHERE polarity > 0.0 and subjectivity < 0.5 "
+            "GROUP BY title, url "
+            "ORDER BY time_created DESC, publish_time DESC;"
+        )
+    with sql_execute(query) as result:
         list_of_dicts = [
             dict((key, value) for key, value in row.items()) for row in result
         ]
@@ -158,33 +177,32 @@ def fetch_articles_and_save():
                 dt = datetime.strptime(ods, "%Y-%m-%dT%H:%M:%S")
                 dts = dt.strftime('%Y-%m-%d %H:%M:%S')
                 sentiment_tuple = grade_article_title(article["title"])
-                with sql_execute(
-                    """INSERT INTO UnsortedArticles
-                    (author, title, url, imageurl, sentiment, description, publishtime, polarity, subjectivity)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)""",
-                    article["author"],
-                    article["title"],
-                    article["url"],
-                    article["urlToImage"],
-                    sentiment_tuple,
-                    article["description"],
-                    dts,
-                    sentiment_tuple['polarity'],
-                    sentiment_tuple['subjectivity'],
-                ):
-                    pass
+                with engine.connect() as conn:
+                    insert_statement = articles_table.insert().values(
+                        author=article["author"],
+                        title= article["title"],
+                        url= article["url"],
+                        url_to_image= article["urlToImage"],
+                        sentiment=article["sentiment"],
+                        description= article["description"],
+                        publish_time= dts,
+                        polarity= sentiment_tuple["Polarity"],
+                        subjectivity= sentiment_tuple["Subjectivity"]
+                    )
+                    conn.execute(insert_statement)
             else:
-                with sql_execute(
-                    """INSERT INTO UnsortedArticles
-                    (author, title, url, imageurl, description)
-                    VALUES (%s,%s, %s, %s, %s)""",
-                    article["author"],
-                    article["title"],
-                    article["url"],
-                    article["urlToImage"],
-                    article["description"]
-                ):
-                    pass
+                with engine.connect() as conn:
+                    insert_statement = articles_table.insert().values(
+                        author=article["author"],
+                        title= article["title"],
+                        url= article["url"],
+                        url_to_image= article["urlToImage"],
+                        sentiment=article["sentiment"],
+                        description= article["description"],
+                        polarity= sentiment_tuple["Polarity"],
+                        subjectivity= sentiment_tuple["Subjectivity"]
+                    )
+                    conn.execute(insert_statement)
     return "complete"
 
 
@@ -198,48 +216,39 @@ def grade_article_title(title):
 
 
 def add_sentiment_to_article_records():
-    with sql_execute(
-            "SELECT *\
-            FROM UnsortedArticles\
-            WHERE Sentiment IS NULL\
-            OR Sentiment = ''"
-        ) as result:
-            list_of_dicts = [
-                dict((key, value) for key, value in row.items())
-                for row in result
-            ]
-    if list_of_dicts:
-        for article in list_of_dicts:
-            if article["sentiment"] is None:
-                article["sentiment"] = grade_article_title(
-                    article["title"].decode('utf8')
-                )
-        for article in list_of_dicts:
-            print("Article Sentiment: {}".format(article['sentiment']))
-            sentiment_string = article['sentiment'].decode('utf8')
-            sentiment_dict = literal_eval(sentiment_string)
-            with sql_execute(
-                "Update UnsortedArticles SET sentiment=\"{}\",\
-                polarity={}, subjectivity={}\
-                WHERE articleID={}\
-                AND(\
-                sentiment IS NULL OR\
-                polarity IS NULL OR\
-                subjectivity IS NULL\
-                )".format(
-                    article['sentiment'].decode('utf8'),
-                    sentiment_dict['Polarity'],
-                    sentiment_dict['Subjectivity'],
-                    article['articleID'],
-                )
-            ):
-                pass
+    row_list = []
+    with engine.connect() as conn:
+        select_statement = articles_table.select().where(
+            articles_table.c.sentiment == None
+        )
+        result_set = conn.execute(select_statement)
+        # building a dict that can be manipulated from the result set
+        for row in result_set:
+            row_dict = dict(row.items())
+            row_list.append(row_dict)
+    if row_list:
+        for r in row_list:
+            if r['sentiment'] is None or r['sentiment'] == '' :
+                sentiment = grade_article_title(r['title'])
+                r['sentiment'] = json.dumps(sentiment)
+                with engine.connect() as conn:
+                    update_statement = articles_table.update().where(
+                        articles_table.c.article_id==r['article_id']
+                    ).values(
+                        sentiment=r['sentiment'],
+                        polarity=sentiment['Polarity'],
+                        subjectivity=sentiment['Subjectivity']
+                    )
+                    conn.execute(update_statement)
+    else:
+        print('No blank sentiment values found')
+    print('Sentiment Addition Complete')
+
 
 # Seconds can be replaced with minutes, hours, or days
 sched.add_job(fetch_articles_and_save, trigger='cron', day='*', hour='0')
 sched.add_job(add_sentiment_to_article_records, trigger='cron', day='*', hour='0', minute='30')
 sched.start()
-
 
 if __name__ == '__main__':
     app.run()
