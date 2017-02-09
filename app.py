@@ -12,6 +12,7 @@ import logging
 from textblob import TextBlob
 from ast import literal_eval
 import psycopg2
+from flask.ext.heroku import Heroku
 
 
 logger = logging.getLogger(__name__)
@@ -21,6 +22,9 @@ coloredlogs.install(level='DEBUG')
 sched = BackgroundScheduler()
 
 app = Flask(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pre-registration'
+heroku = Heroku(app)
+db = SQLAlchemy(app)
 
 
 # Helpers
