@@ -12,7 +12,9 @@ import logging
 from textblob import TextBlob
 from ast import literal_eval
 import psycopg2
-from flask.ext.heroku import Heroku
+from flask_heroku import Heroku
+from flask_sqlalchemy import SQLAlchemy
+
 
 
 logger = logging.getLogger(__name__)
