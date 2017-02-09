@@ -91,12 +91,12 @@ def get_multisource_news_array(sources, sort):
     return json_news_list
 
 
-def build_url_list(parsed_json):
+def build_url_list(row_dict_list):
     anchor = "<a href={url}>{title}</a>"
-    for article in parsed_json:
+    for article in row_dict_list:
         yield anchor.format(
-            url=(article["url"]).decode('utf8'),
-            title=(article["title"]).decode('utf8'),
+            url=(article["url"]),
+            title=(article["title"]),
         )
 
 
@@ -131,39 +131,74 @@ def sql_execute(query, *args, **kwargs):
 @app.route('/unsortedlist')
 def list_articles():
     lines = None
-    with sql_execute("SELECT * FROM \"Articles\"") as result:
-        list_of_dicts = [
-            dict((key, value) for key, value in row.items()) for row in result
-        ]
-        # print("list of dicts: {}".format(list_of_dicts))
-        lines = "<br/>".join(build_url_list(list_of_dicts))
+    row_list = []
+    with engine.connect() as conn:
+        select_statement = articles_table.select()
+        result_set = conn.execute(select_statement)
+        # building a dict that can be manipulated from the result set
+        for row in result_set:
+            row_dict = dict(row.items())
+            row_list.append(row_dict)
+    lines = "<br/>".join(build_url_list(row_list))
     return lines
 
 @app.route('/badnews')
 def bad_news():
     lines = None
-    with sql_execute("SELECT title, url, time_created, publish_time FROM \"Articles\" WHERE polarity < 0 GROUP BY title ORDER BY time_created DESC, publish_time DESC;") as result:
-        list_of_dicts = [
-            dict((key, value) for key, value in row.items()) for row in result
-        ]
-        lines = "<br/>".join(build_url_list(list_of_dicts))
+    row_list = []
+    with engine.connect() as conn:
+        select_statement = articles_table.select().where(
+            articles_table.c.polarity < 0
+        ).group_by(
+            articles_table.c.article_id,
+            articles_table.c.title
+        ).order_by(
+            articles_table.c.time_created.desc(),
+            articles_table.c.publish_time.desc()
+        )
+        result_set = conn.execute(select_statement)
+        # building a dict that can be manipulated from the result set
+        for row in result_set:
+            row_dict = dict(row.items())
+            row_list.append(row_dict)
+    lines = "<br/>".join(build_url_list(row_list))
     return lines
 
 @app.route('/goodnews')
 def good_news():
     lines = None
-    query = (
-            "SELECT title, url, time_created, publish_time "
-            "FROM \"Articles\" "
-            "WHERE polarity > 0.0 and subjectivity < 0.5 "
-            "GROUP BY title, url "
-            "ORDER BY time_created DESC, publish_time DESC;"
+    # query = (
+    #         "SELECT title, url, time_created, publish_time "
+    #         "FROM \"Articles\" "
+    #         "WHERE polarity > 0.0 and subjectivity < 0.5 "
+    #         "GROUP BY title, url "
+    #         "ORDER BY time_created DESC, publish_time DESC;"
+    #     )
+    # with sql_execute(query) as result:
+    #     list_of_dicts = [
+    #         dict((key, value) for key, value in row.items()) for row in result
+    #     ]
+    row_list = []
+    with engine.connect() as conn:
+        select_statement = articles_table.select().where(
+            and_(
+                articles_table.c.polarity > 0.0,
+                articles_table.c.subjectivity < 0.5
+            )
+        ).group_by(
+            articles_table.c.article_id,
+            articles_table.c.title,
+            articles_table.c.time_created
+        ).order_by(
+            articles_table.c.time_created.desc(),
+            articles_table.c.publish_time.desc()
         )
-    with sql_execute(query) as result:
-        list_of_dicts = [
-            dict((key, value) for key, value in row.items()) for row in result
-        ]
-        lines = "<br/>".join(build_url_list(list_of_dicts))
+        result_set = conn.execute(select_statement)
+        # building a dict that can be manipulated from the result set
+        for row in result_set:
+            row_dict = dict(row.items())
+            row_list.append(row_dict)
+    lines = "<br/>".join(build_url_list(row_list))
     return lines
 
 def fetch_articles_and_save():
