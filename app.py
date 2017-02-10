@@ -14,6 +14,7 @@ from ast import literal_eval
 import psycopg2
 from flask_heroku import Heroku
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 
 
@@ -31,9 +32,12 @@ db = SQLAlchemy(app)
 
 # Helpers
 def load_config_settings():
-    with open('config.json') as json_data:
-        settings = json.load(json_data)
-        return settings
+    if os.environ.get('is_heroku', None) == None:
+        with open('config.json') as json_data:
+            settings = json.load(json_data)
+            return settings
+    else:
+        return dict(os.environ)
 
 
 # Settings
