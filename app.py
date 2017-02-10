@@ -75,9 +75,12 @@ else:
 engine = create_engine(CONNECTION_STRING, pool_recycle=3600)
 connection = engine.connect()
 meta = MetaData(engine)
-articles_table = Table('Articles', meta, autoload=True, autoload_with=engine)
-# from ipdb import set_trace; set_trace()
-# print("-----------------------------META: {}".format(meta))
+articles_table = Table(
+    'Articles',
+    meta,
+    autoload=True,
+    autoload_with=engine
+)
 
 
 def get_news(source, sort, key):
