@@ -59,15 +59,19 @@ newsSources = [
 
 
 # SQL Connection
-CONNECTION_STRING = (
-    "postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}".format(
-        user=settings['dbuser'],
-        password=settings['dbpw'],
-        host=settings["dbhost"],
-        port=settings['dbport'],
-        db=settings['db'],
+CONNECTION_STRING = None
+if os.environ.get('is_heroku', None) == None:
+    CONNECTION_STRING = (
+        "postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}".format(
+            user=settings['dbuser'],
+            password=settings['dbpw'],
+            host=settings["dbhost"],
+            port=settings['dbport'],
+            db=settings['db'],
+        )
     )
-)
+else:
+    CONNECTION_STRING = os.environ.get('DATABASE_URL')
 engine = create_engine(CONNECTION_STRING, pool_recycle=3600)
 connection = engine.connect()
 meta = MetaData(engine)
