@@ -57,6 +57,20 @@ newsSources = [
     'the-washington-post',
 ]
 
+def print_json(json_obj):
+    print (
+        json.dumps(
+            json_obj,
+            sort_keys=True,
+            indent=4,
+            separators=(
+                ','
+                ,
+                ': '
+            )
+        )
+    )
+
 
 # SQL Connection
 CONNECTION_STRING = None
@@ -72,6 +86,8 @@ if os.environ.get('is_heroku', None) == None:
     )
 else:
     CONNECTION_STRING = os.environ.get('DATABASE_URL')
+
+
 engine = create_engine(CONNECTION_STRING, pool_recycle=3600)
 connection = engine.connect()
 meta = MetaData(engine)
@@ -115,15 +131,6 @@ def build_url_list(row_dict_list):
             url=(article["url"]),
             title=(article["title"]),
         )
-
-
-def format_data(json_content):
-    # TODO: return more than just titles
-    parsed_json = json.loads(json_content)
-    if parsed_json["status"] == "ok":
-        lines = "<br/>".join(build_url_list(parsed_json))
-        return lines
-    return "status == not ok"
 
 
 @app.route('/')
@@ -178,23 +185,12 @@ def bad_news():
         for row in result_set:
             row_dict = dict(row.items())
             row_list.append(row_dict)
-    lines = "<br/>".join(build_url_list(row_list))
+    lines = json.dumps(row_list, indent=4, sort_keys=True, default=str)
     return lines
 
 @app.route('/goodnews')
 def good_news():
     lines = None
-    # query = (
-    #         "SELECT title, url, time_created, publish_time "
-    #         "FROM \"Articles\" "
-    #         "WHERE polarity > 0.0 and subjectivity < 0.5 "
-    #         "GROUP BY title, url "
-    #         "ORDER BY time_created DESC, publish_time DESC;"
-    #     )
-    # with sql_execute(query) as result:
-    #     list_of_dicts = [
-    #         dict((key, value) for key, value in row.items()) for row in result
-    #     ]
     row_list = []
     with engine.connect() as conn:
         select_statement = articles_table.select().where(
@@ -215,7 +211,7 @@ def good_news():
         for row in result_set:
             row_dict = dict(row.items())
             row_list.append(row_dict)
-    lines = "<br/>".join(build_url_list(row_list))
+    lines = json.dumps(row_list, indent=4, sort_keys=True, default=str)
     return lines
 
 def fetch_articles_and_save():
