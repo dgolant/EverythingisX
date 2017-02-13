@@ -1,0 +1,1043 @@
+/* line 8, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* line 28, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* line 32, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+body {
+  line-height: 1;
+}
+
+/* line 35, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+ol, ul {
+  list-style: none;
+}
+
+/* line 38, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+blockquote, q {
+  quotes: none;
+}
+
+/* line 41, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* line 46, /Users/Dan/Desktop/Code Projects/mySite/_sass/_meyer.sass */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*!normalize.css v3.0.3|MIT License|necolas.github.io/normalize.css*/
+/* line 10, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* line 17, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+body {
+  margin: 0;
+}
+
+/* line 28, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* line 46, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* line 56, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/* line 63, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+[hidden],
+template {
+  display: none;
+}
+
+/* line 72, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+a {
+  background-color: transparent;
+}
+
+/* line 74, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+a:active, a:hover {
+  outline: 0;
+}
+
+/* line 86, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 91, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+b,
+strong {
+  font-weight: bold;
+}
+
+/* line 97, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+dfn {
+  font-style: italic;
+}
+
+/* line 103, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* line 109, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/* line 115, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+small {
+  font-size: 80%;
+}
+
+/* line 120, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 126, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+
+/* line 133, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+sub {
+  bottom: -0.25em;
+}
+
+/* line 141, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+img {
+  border: 0;
+}
+
+/* line 146, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* line 154, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+figure {
+  margin: 1em 40px;
+}
+
+/* line 159, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/* line 165, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+pre {
+  overflow: auto;
+}
+
+/* line 170, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* line 188, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+/* line 199, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+button {
+  overflow: visible;
+  text-transform: none;
+}
+
+/* line 208, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+select {
+  text-transform: none;
+}
+
+/* line 217, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+button,
+html input[type="button"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 225, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 232, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/* line 238, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 242, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input {
+  line-height: normal;
+}
+
+/* line 243, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 247, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* line 252, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/* line 255, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+
+/* line 258, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 284, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/* line 292, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+legend {
+  border: 0;
+  padding: 0;
+}
+
+/* line 300, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+textarea {
+  overflow: auto;
+}
+
+/* line 306, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+optgroup {
+  font-weight: bold;
+}
+
+/* line 314, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 318, /Users/Dan/Desktop/Code Projects/mySite/_sass/_normalize.sass */
+td,
+th {
+  padding: 0;
+}
+
+/* line 8, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+body.index {
+  background-image: url(../_img/bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #666;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+/* line 16, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#ProjectsContainer {
+  position: fixed;
+  left: 450px;
+  height: 100%;
+  width: -webkit-calc(100% - 450px);
+  width: -moz-calc(100% - 450px);
+  width: calc(100% - 450px);
+}
+
+/* line 23, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#ProjectsContainer .ProjectContainer {
+  height: 400px;
+  width: 400px;
+}
+
+/* line 26, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#ProjectsContainer .ProjectContainer .ProjectImageContainer {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+  top: 40px;
+  margin: 0 auto;
+  border-style: solid;
+  border-color: rgba(244, 244, 244, 0.7);
+  border-width: 10px;
+  border-radius: 50%;
+  float: top;
+}
+
+/* line 39, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#ProjectsContainer .ProjectContainer .ProjectImageContainer .ProjectImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-height: 100%;
+}
+
+/* line 45, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#ProjectsContainer .ProjectContainer figcaption {
+  position: relative;
+  background-color: rgba(244, 244, 244, 0.7);
+  color: #353535;
+  top: 75px;
+  width: 200px;
+  height: 20px;
+  text-align: center;
+  padding-top: 5px;
+  border-radius: 10px;
+  max-height: 100%;
+  margin: 0 auto;
+  top: 50px;
+}
+
+/* line 60, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#Wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 450px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* line 69, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+a {
+  text-decoration: none;
+}
+
+/* line 72, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent {
+  position: absolute;
+  top: 150px;
+  right: 40px;
+  left: 40px;
+  bottom: 50px;
+  width: 329.344px;
+  font-family: "Trebuchet MS", arial, sans-serif;
+  color: #333;
+  line-height: 15px;
+}
+
+/* line 83, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent h1 {
+  color: desktop-font-color;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+}
+
+/* line 88, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent h2 {
+  color: desktop-font-color;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400px;
+  padding-bottom: 15px;
+}
+
+/* line 94, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent hr {
+  color: desktop-font-color;
+  left: 40px;
+}
+
+/* line 97, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent p {
+  color: desktop-font-color;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.675;
+  font-size: 18px;
+  font-weight: lighter;
+  padding-bottom: 15px;
+}
+
+/* line 104, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa {
+  background-color: #333;
+  border-radius: 30px;
+  color: white !important;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  margin: auto 15px auto auto;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* line 115, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-facebook {
+  background-color: #3B5998;
+}
+
+/* line 117, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-facebook:hover {
+  background-color: rgba(59, 89, 152, 0.75);
+  background-color-margin-top: -2px;
+  background-color-box-shadow: 3px 5px 15px black;
+}
+
+/* line 119, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-twitter {
+  background-color: #46c0fb;
+}
+
+/* line 121, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-twitter:hover {
+  background-color: rgba(70, 192, 251, 0.75);
+  background-color-margin-top: -2px;
+  background-color-box-shadow: 3px 5px 15px black;
+}
+
+/* line 123, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-linkedin {
+  background-color: #125688;
+}
+
+/* line 125, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-linkedin:hover {
+  background-color: rgba(18, 86, 136, 0.75);
+  background-color-margin-top: -2px;
+  background-color-box-shadow: 3px 5px 15px black;
+}
+
+/* line 127, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-github {
+  background-color: #333;
+}
+
+/* line 129, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-github:hover {
+  background-color: rgba(51, 51, 51, 0.75);
+  background-color-margin-top: -2px;
+  background-color-box-shadow: 3px 5px 15px black;
+}
+
+/* line 131, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-envelope {
+  background-color: #e37d7d;
+}
+
+/* line 133, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+#MainContent .fa-envelope:hover {
+  background-color: #D19090;
+  background-color-margin-top: -2px;
+  background-color-box-shadow: 3px 5px 15px black;
+}
+
+@media screen and (max-width: 480px) {
+  /* line 138, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index {
+    overflow-x: hidden;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #666666;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    width: inherit;
+  }
+  /* line 146, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #ProjectsContainer {
+    position: absolute;
+    top: 650px;
+    left: 0px;
+    height: 100%;
+    width: 120%;
+  }
+  /* line 155, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #ProjectsContainer .ProjectContainer .ProjectImageContainer {
+    position: relative;
+    overflow: hidden;
+  }
+  /* line 158, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #ProjectsContainer .ProjectContainer .ProjectImageContainer .ProjectImage {
+    overflow: hidden;
+  }
+  /* line 160, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #ProjectsContainer figcaption {
+    position: relative;
+    background-color: rgba(244, 244, 244, 0.7);
+    color: #353535;
+    top: 75px;
+    width: 200px;
+    height: 20px;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 10px;
+    max-height: 100%;
+    margin: 0 auto;
+    top: 50px;
+  }
+  /* line 173, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #Wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+  /* line 180, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #MainContent {
+    margin: 0 auto;
+    width: 70%;
+  }
+  /* line 183, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #MainContent h1 {
+    text-align: center;
+    font-size: 30.5px;
+    color: #646464;
+  }
+  /* line 187, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #MainContent h2 {
+    text-align: center;
+    color: #646464;
+  }
+  /* line 190, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #MainContent p {
+    text-align: justify;
+    text-align-last: justify;
+    font-size: 15.5px;
+    color: #646464;
+    padding-bottom: 15px;
+  }
+  /* line 196, /Users/Dan/Desktop/Code Projects/mySite/_sass/_index.sass */
+  body.index #MainContent .fa {
+    margin-left: 7%;
+  }
+}
+
+/* line 4, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+body.november.loading {
+  height: 100%;
+  width: 100%;
+  background: RGBA(254, 254, 254, 0.7);
+  -webkit-transition: background-color 0;
+  transition: background-color 0;
+  opacity: 0;
+  -webkit-transition: opacity 0;
+  transition: opacity 0;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+}
+
+/* line 16, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+body.november {
+  background-color: #F1F1F1;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url(../_img/vor21.svg);
+  -webkit-transition: background-color 1;
+  transition: background-color 1;
+  opacity: 1;
+  -webkit-transition: opacity 1;
+  transition: opacity 1;
+  transition-duration: 2s;
+  transition-timing-function: ease-out;
+}
+
+/* line 30, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.header {
+  position: absolute;
+  display: inline-block;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  color: #353535;
+}
+
+/* line 38, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.header .novemberTitle {
+  text-align: center;
+  font-weight: 800;
+  font-size: 50px;
+  left: 450px;
+}
+
+/* line 43, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.header .backButton {
+  position: relative;
+  font-weight: 400;
+  font-size: 20px;
+  top: 35px;
+  left: 30px;
+  color: #656565;
+}
+
+/* line 50, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.container {
+  display: inline-block;
+}
+
+/* line 52, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar {
+  position: fixed;
+  display: inline-block;
+  top: 90px;
+  left: 0;
+  bottom: 0;
+  width: 450px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* line 61, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  left: 40px;
+  bottom: 50px;
+  width: 329.344px;
+  font-family: "Trebuchet MS", arial, sans-serif;
+  color: #888888;
+  line-height: 15px;
+}
+
+/* line 71, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb h1 {
+  color: #888888;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* line 77, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb h2 {
+  color: #888888;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400px;
+  padding-bottom: 15px;
+}
+
+/* line 83, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb hr {
+  color: #888888;
+  left: 40px;
+}
+
+/* line 86, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb p {
+  color: #888888;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.675;
+  font-size: 18px;
+  font-weight: lighter;
+  padding-bottom: 15px;
+  text-align: justify;
+}
+
+/* line 94, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb .donateButton {
+  position: relative;
+}
+
+/* line 96, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.sidebar .blurb .donateButton a {
+  color: RGBA(254, 254, 254, 1);
+  background-color: RGBA(53, 53, 53, 1);
+  text-decoration-color: red;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+  border-color: RGBA(53, 53, 53, 1);
+  position: absolute;
+  text-align: center;
+  margin: 0 auto;
+  width: 329.344px;
+}
+
+/* line 111, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.gallery {
+  display: inline-block;
+  position: relative;
+  top: 90px;
+  left: 450px;
+  width: calc(100% - 450px);
+  height: 100%;
+}
+
+/* line 118, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.gallery .photoDiv {
+  display: inline-block;
+  margin-right: 20px;
+  max-width: 300px;
+  max-height: 250px;
+  width: 300px;
+  height: 300px;
+}
+
+/* line 125, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.gallery .photoDiv .dayImage {
+  display: block;
+  margin: auto;
+  border-style: solid;
+  border-color: #FEFEFE;
+  border-width: 10px;
+  border-radius: 3px;
+  max-height: 250px;
+  max-width: 250px;
+}
+
+/* line 134, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.gallery .photoDiv figcaption {
+  background-color: #FEFEFE;
+  color: RGBA(101, 101, 101, 1);
+  width: 60px;
+  border-radius: 5px;
+  padding-top: 5px;
+  min-height: 20px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+/* line 145, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.zoomed div {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  padding-top: 10px;
+}
+
+/* line 154, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+.gallery .photoDiv.zoomed .photoWrapperDiv .dayImage {
+  height: 80%;
+  width: auto;
+  max-height: 80vh;
+  max-width: 100vw;
+}
+
+@media screen and (max-width: 480px) {
+  /* line 162, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  body.november {
+    background: url(../_img/mobilevor.svg);
+  }
+  /* line 164, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .gallery {
+    right: 10%;
+    left: 10%;
+    top: 640px;
+  }
+  /* line 168, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .header {
+    top: 10px;
+  }
+  /* line 170, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .header .novemberTitle {
+    text-align: center;
+    font-weight: 800;
+    font-size: 50px;
+    left: 450px;
+  }
+  /* line 175, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .header .backButton {
+    display: none;
+  }
+  /* line 177, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .sidebar {
+    position: absolute;
+    width: 100%;
+    height: 500px;
+    margin-top: 30px;
+  }
+  /* line 182, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .sidebar .blurb {
+    width: 80%;
+    left: 10%;
+    right: 10%;
+  }
+  /* line 194, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .sidebar .blurb p {
+    color: #888888;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.0;
+    font-size: 18px;
+    font-weight: lighter;
+    padding-bottom: 15px;
+    text-align: justify;
+  }
+  /* line 202, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .sidebar .blurb .donateButton {
+    width: 100%;
+  }
+  /* line 204, /Users/Dan/Desktop/Code Projects/mySite/_sass/_november.sass */
+  .sidebar .blurb .donateButton a {
+    width: 100%;
+  }
+}
+
+/* line 4, /Users/Dan/Desktop/Code Projects/mySite/_sass/_flyingfocus.sass */
+#flying-focus {
+  position: absolute;
+  border-radius: 2px;
+  margin: 0px;
+  background: transparent;
+  transition-property: left, top, width, height, opacity;
+  transition-timing-function: cubic-bezier(0, 0.2, 0, 1);
+  box-shadow: 0px 0px 2px 3px #78AEDA, 0px 0px 2px #78AEDA inset;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* line 15, /Users/Dan/Desktop/Code Projects/mySite/_sass/_flyingfocus.sass */
+#flying-focus.flying-focus_visible {
+  visibility: visible;
+  z-index: 9999;
+}
+
+/* line 19, /Users/Dan/Desktop/Code Projects/mySite/_sass/_flyingfocus.sass */
+.flying-focus_target {
+  outline: none !important;
+}
+
+/* line 22, /Users/Dan/Desktop/Code Projects/mySite/_sass/_flyingfocus.sass */
+.flying-focus_target::-moz-focus-inner {
+  border: 0px !important;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* line 26, /Users/Dan/Desktop/Code Projects/mySite/_sass/_flyingfocus.sass */
+  #flying-focus {
+    box-shadow: none;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -3px;
+  }
+}
+
+@media (max-width: 414px) {
+  /* line 4, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #Wrapper {
+    width: 320px;
+  }
+  /* line 6, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #MainContent {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    left: 40px;
+    bottom: 50px;
+    width: 240px;
+    font-family: "Trebuchet MS", arial, sans-serif;
+    color: #333;
+    line-height: 10px;
+  }
+  /* line 16, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #MainContent h1 {
+    color: #888888;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 37.5px;
+    font-weight: 400;
+  }
+  /* line 21, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #MainContent h2 {
+    color: #888888;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5px;
+    font-weight: 400px;
+    padding-bottom: 15px;
+  }
+  /* line 27, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #MainContent hr {
+    color: #888888;
+    left: 40px;
+  }
+  /* line 30, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #MainContent p {
+    color: #888888;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.675;
+    font-size: 13.5px;
+    font-weight: lighter;
+    padding-bottom: 10px;
+  }
+  /* line 37, /Users/Dan/Desktop/Code Projects/mySite/_sass/_mediaqueries.sass */
+  #MainContent .fa {
+    margin: auto 2px auto auto;
+    bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 518px) {
+  /* line 24, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .gecko #MainNav li a:nth-of-type(even),
+  .gecko.mobile #MainNav li a:nth-of-type(even) {
+    width: 158px;
+  }
+  /* line 26, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .gecko #MainNav li a:nth-of-type(odd),
+  .gecko.mobile #MainNav li a:nth-of-type(odd) {
+    width: 158px;
+  }
+  /* line 30, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .ie #MainNav li a:nth-of-type(even) {
+    width: 160px;
+  }
+  /* line 32, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .ie #MainNav li a:nth-of-type(odd) {
+    width: 160px;
+    margin-right: 0px;
+  }
+  /* line 37, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .safari.win #MainNav li a:nth-of-type(even) {
+    width: 157px;
+  }
+  /* line 39, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .safari.win #MainNav li a:nth-of-type(odd) {
+    width: 157px;
+    margin-right: 1px;
+  }
+  /* line 44, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .android #MainNav li a:nth-of-type(even) {
+    width: 159px;
+  }
+  /* line 46, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .android #MainNav li a:nth-of-type(odd) {
+    width: 159px;
+  }
+}
+
+@media screen and (max-width: 336px) {
+  /* line 54, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .gecko #MainNav li a:nth-of-type(even),
+  .gecko.mobile #MainNav li a:nth-of-type(even) {
+    width: 238px;
+  }
+  /* line 56, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .gecko #MainNav li a:nth-of-type(odd),
+  .gecko.mobile #MainNav li a:nth-of-type(odd) {
+    width: 238px;
+  }
+  /* line 60, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .ie #MainNav li a:nth-of-type(even) {
+    width: 240px;
+    margin: 0px;
+  }
+  /* line 63, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .ie #MainNav li a:nth-of-type(odd) {
+    width: 240px;
+    margin: 0px;
+  }
+  /* line 68, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .safari.win #MainNav li a:nth-of-type(even) {
+    width: 238px;
+  }
+  /* line 70, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .safari.win #MainNav li a:nth-of-type(odd) {
+    width: 238px;
+  }
+  /* line 74, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .android #MainNav li a:nth-of-type(even) {
+    width: 238px;
+  }
+  /* line 76, /Users/Dan/Desktop/Code Projects/mySite/_sass/_crossbrowser.sass */
+  .android #MainNav li a:nth-of-type(odd) {
+    width: 238px;
+  }
+}
+
+/*# sourceMappingURL=../_style/style.map */

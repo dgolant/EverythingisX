@@ -20,12 +20,9 @@ import os
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG')
-
-
 sched = BackgroundScheduler()
-
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/pre-registration'
+app._static_folder = os.path.abspath("static/")
 heroku = Heroku(app)
 db = SQLAlchemy(app)
 
@@ -43,6 +40,7 @@ def load_config_settings():
 # Settings
 settings = load_config_settings()
 news_api_key = settings["news_api_key"]
+
 
 newsSources = [
     'associated-press',
@@ -64,8 +62,7 @@ def print_json(json_obj):
             sort_keys=True,
             indent=4,
             separators=(
-                ','
-                ,
+                ',',
                 ': '
             )
         )
@@ -76,7 +73,12 @@ def print_json(json_obj):
 CONNECTION_STRING = None
 if os.environ.get('is_heroku', None) == None:
     CONNECTION_STRING = (
-        "postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}".format(
+        "postgresql+psycopg2://"
+        "{user}:"
+        "{password}@"
+        "{host}:"
+        "{port}/"
+        "{db}".format(
             user=settings['dbuser'],
             password=settings['dbpw'],
             host=settings["dbhost"],
@@ -97,6 +99,20 @@ articles_table = Table(
     autoload=True,
     autoload_with=engine
 )
+
+
+@contextmanager
+def sql_execute(query, *args, **kwargs):
+    try:
+        result = engine.execute(query, *args, **kwargs)
+        logging.info(
+            "{query_operation} EXECUTED"
+            .format(query_operation=query[:6])
+        )
+        yield result
+    except Exception:
+        print("whoops")
+        result.close()
 
 
 def get_news(source, sort, key):
@@ -133,23 +149,10 @@ def build_url_list(row_dict_list):
         )
 
 
+# Routes
 @app.route('/')
 def hello():
-    return "Hello World!"
-
-
-@contextmanager
-def sql_execute(query, *args, **kwargs):
-    try:
-        result = engine.execute(query, *args, **kwargs)
-        logging.info(
-            "{query_operation} EXECUTED"
-            .format(query_operation=query[:6])
-        )
-        yield result
-    except Exception:
-        print("whoops")
-        result.close()
+    return "200 OK"
 
 
 @app.route('/unsortedlist')
@@ -166,7 +169,8 @@ def list_articles():
     lines = "<br/>".join(build_url_list(row_list))
     return lines
 
-@app.route('/badnews')
+
+@app.route('/badnewsjson')
 def bad_news():
     lines = None
     row_list = []
@@ -188,7 +192,8 @@ def bad_news():
     lines = json.dumps(row_list, indent=4, sort_keys=True, default=str)
     return lines
 
-@app.route('/goodnews')
+
+@app.route('/goodnewsjson')
 def good_news():
     lines = None
     row_list = []
@@ -213,6 +218,16 @@ def good_news():
             row_list.append(row_dict)
     lines = json.dumps(row_list, indent=4, sort_keys=True, default=str)
     return lines
+
+
+@app.route('/goodnews')
+def good_news_page():
+    root_dir = os.path.dirname(os.getcwd())
+    return app.send_static_file(
+        'views/goodnews.html'
+    )
+
+
 
 def fetch_articles_and_save():
     news_json_array = get_multisource_news_array(newsSources, "top")
@@ -294,8 +309,23 @@ def add_sentiment_to_article_records():
 
 
 # Seconds can be replaced with minutes, hours, or days
-sched.add_job(fetch_articles_and_save, trigger='cron', day='*', hour='0')
-sched.add_job(add_sentiment_to_article_records, trigger='cron', day='*', hour='0', minute='30')
+sched.add_job(
+    fetch_articles_and_save,
+    trigger='cron',
+    day='*',
+    hour='0'
+)
+
+
+sched.add_job(
+    add_sentiment_to_article_records,
+    trigger='cron',
+    day='*',
+    hour='0',
+    minute='30'
+)
+
+
 sched.start()
 
 if __name__ == '__main__':
