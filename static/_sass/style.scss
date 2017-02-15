@@ -10,9 +10,8 @@
 //@import "_header.sass";       // CSS for the header and navigation at the top of each page
 //@import "_footer.sass";       // CSS for the footer at the bottom of every page
 
-//Stuff that effects specific pages
-@import "_index.sass";
-@import "_november.sass";
+//Stuff that affects specific pages
+@import "_everythingisgood.sass";
 
 //Stuff that goes at the end
 @import "_flyingfocus.sass";  // CSS generated specifically by the Flying Focus js plugin

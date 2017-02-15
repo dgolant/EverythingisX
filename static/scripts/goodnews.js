@@ -1,10 +1,5 @@
 //lifecycle
 var body;
-var removeLoading = function() {
-    setTimeout(function() {
-        body.className = body.className.replace(/ loading/, '');
-    }, 3000);
-};
 
 window.onload = function() {
     body = document.getElementsByTagName('body')[0];
@@ -19,27 +14,26 @@ function generateDivs(jsonArray) {
         div.setAttribute('class', 'articleDiv')
         div.id = "articleDiv" + i;
 
-        var img = document.createElement("article");
+        var article = document.createElement("a");
         var articleWrapperDiv = document.createElement("div");
         articleWrapperDiv.setAttribute('class', 'articleWrapperDiv');
         articleWrapperDiv.id = 'articleWrapperDiv' + i;
-        img.setAttribute('src', jsonArray[i].url);
-        img.setAttribute('class', 'articleTitle');
-        img.setAttribute('title', jsonArray[i].title);
-        img.setAttribute('textContent', jsonArray[i].title);
+        article.setAttribute('href', jsonArray[i].url);
+        article.setAttribute('class', 'articleTitle');
+        article.setAttribute('title', jsonArray[i].title);
+        article.innerHTML = jsonArray[i].title;
 
 
-        articleWrapperDiv.appendChild(img);
+        articleWrapperDiv.appendChild(article);
         div.appendChild(articleWrapperDiv);
 
 
 
         document.getElementsByClassName("repeater")[0].appendChild(div);
-        document.getElementById("articleDiv" + i).addEventListener('click', function(e) {
-            console.log("TODO ADD CLICK")
-        });
+        // document.getElementById("articleDiv" + i).addEventListener('click', function(e) {
+        //     console.log("TODO ADD CLICK")
+        // });
     }
-    removeLoading();
 }
 
 function isArray(what) {
@@ -54,7 +48,7 @@ function fetchArticles(callback) {
     request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
             // Success!
-            console.log(request.responseText);
+            // console.log(request.responseText);
             var parser = new DOMParser();
             var json = JSON.parse(request.responseText);
             if (!isArray(json)) {
