@@ -9,25 +9,51 @@ window.onload = function() {
 
 //helper
 function generateDivs(jsonArray) {
+    var spaceRegex = / /;
+
     for (i = 0; i < jsonArray.length; i++) {
+
+        //Wrapper
         var div = document.createElement("div");
-        div.setAttribute('class', 'articleDiv')
-        div.id = "articleDiv" + i;
+        div.setAttribute('class', 'articleWrapperDiv')
+        div.id = "articleWrapperDiv" + i;
+
+        //Article Text and Meta stuff
+        var articleDiv = document.createElement("div");
+        articleDiv.setAttribute('class', 'articleDiv');
+        articleDiv.id = 'articleDiv' + i;
 
         var article = document.createElement("a");
-        var articleWrapperDiv = document.createElement("div");
-        articleWrapperDiv.setAttribute('class', 'articleWrapperDiv');
-        articleWrapperDiv.id = 'articleWrapperDiv' + i;
         article.setAttribute('href', jsonArray[i].url);
         article.setAttribute('class', 'articleTitle');
         article.setAttribute('title', jsonArray[i].title);
         article.innerHTML = jsonArray[i].title;
 
+        //TODO: GRACEFUL AUTHOR HANDLING
+        // var author = document.createElement("a");
+        // var authorLink = jsonArray[i].author ? 'https://www.google.com/#q='+jsonArray[i].author.replace(spaceRegex, '+') : ''
+        // author.setAttribute('href', authorLink);
+        // author.setAttribute('class', 'authorName');
+        // author.setAttribute('title', jsonArray[i].author);
+        // author.innerHTML = jsonArray[i].author;
 
-        articleWrapperDiv.appendChild(article);
-        div.appendChild(articleWrapperDiv);
+        //image stuff
+        var articleImageWrapper = document.createElement('div');
+        articleImageWrapper.setAttribute('class', 'articleImageWrapper');
+        var articleImage = document.createElement('img');
 
+        articleImage.setAttribute('class', 'articleImage');
+        jsonArray[i].url_to_image ? articleImage.setAttribute('src', jsonArray[i].url_to_image) : articleImage.setAttribute('src', 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg');
 
+        //Appending functions
+        articleImageWrapper.appendChild(articleImage)
+        articleDiv.appendChild(article);
+
+        //TODO: Graceful Author Handling
+        // articleDiv.appendChild(author)
+
+        div.appendChild(articleImageWrapper);
+        div.appendChild(articleDiv);
 
         document.getElementsByClassName("repeater")[0].appendChild(div);
         // document.getElementById("articleDiv" + i).addEventListener('click', function(e) {

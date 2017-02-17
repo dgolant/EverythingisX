@@ -18,22 +18,37 @@ body
 .container
     font-family: "Open Sans", "Arial", sans-serif
     font-size: 20px
-    padding-top: 10px
-    padding-bottom: 10px
+    padding: 20px 50px 0px 50px
     .repeater
         display: flex
-        justify-content: space-between
+        justify-content: space-around
+        flex-wrap: wrap
         .articleWrapperDiv
-            text-align: center
-            margin-top: 10px
-            margin: 10px
-            padding: 30px 20px 30px 20px
-            line-height: 1.2em
             // colors
             background-color: rgba(71, 187, 179, 1.00)
             box-shadow: 8px 5px 5px rgba(0, 0, 0, 0.44)
+            margin: 0px 10px 20px 10px
+            max-width: 20%
+            .articleImageWrapper
+                height: auto
+                width: auto
+                &:hover
+                    filter: blur(10px)
+                .articleImage
+                    max-width: 100%
+                    max-height: 100%
+                    &:hover
+                        filter: saturate(1.5)
+            .articleDiv
+                text-align: center
+                margin-top: 10px
+                margin: 10px
+                padding: 30px 20px 30px 20px
+                line-height: 1.2em
 
 a
     color: rgba(242, 239, 234, 1.00)
     text-decoration: inherit
     font-weight: inherit
+    &:hover
+        background-color: rgba(255, 255, 255, 0.33)
