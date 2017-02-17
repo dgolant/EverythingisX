@@ -329,9 +329,5 @@ sched.add_job(
 
 sched.start()
 
-
-fetch_articles_and_save()
-add_sentiment_to_article_records()
-
 if __name__ == '__main__':
     app.run()
