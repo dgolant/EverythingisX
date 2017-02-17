@@ -246,7 +246,7 @@ def fetch_articles_and_save():
                         title= article["title"],
                         url= article["url"],
                         url_to_image= article["urlToImage"],
-                        sentiment=article["sentiment"],
+                        sentiment=json.dumps(sentiment_tuple),
                         description= article["description"],
                         publish_time= dts,
                         polarity= sentiment_tuple["Polarity"],
@@ -260,12 +260,13 @@ def fetch_articles_and_save():
                         title= article["title"],
                         url= article["url"],
                         url_to_image= article["urlToImage"],
-                        sentiment=article["sentiment"],
+                        sentiment=json.dumps(sentiment_tuple),
                         description= article["description"],
                         polarity= sentiment_tuple["Polarity"],
                         subjectivity= sentiment_tuple["Subjectivity"]
                     )
                     conn.execute(insert_statement)
+                    print(insert_statement)
     return "complete"
 
 
@@ -327,6 +328,10 @@ sched.add_job(
 
 
 sched.start()
+
+
+fetch_articles_and_save()
+add_sentiment_to_article_records()
 
 if __name__ == '__main__':
     app.run()

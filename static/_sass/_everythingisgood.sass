@@ -2,38 +2,38 @@ $sidebar-width: 450px
 $sidebar-top: 90px
 $header-height: 50px
 
-
+body
+    line-height: 1.2em
 
 .header
-    background-color: RGBA(71, 187, 179, 1.0)
-    height: $header-height
-    top: 0
-    left: 0
+    background-color: rgba(71, 187, 179, 1.0)
+    height: auto
     .Title
-        position: relative
         text-align: center
-        vertical-align: middle
-        line-height: $header-height
         font-family: "Abril Fatface", "Times New Roman" , serif
         font-size: 40px
-        letter-spacing: .07em
-        color: RGBA(242, 239, 234, 1.00)
+        line-height: 2em
+        color: rgba(242, 239, 234, 1.00)
 
 .container
     font-family: "Open Sans", "Arial", sans-serif
     font-size: 20px
-    line-height: $header-height
-    background-color: RGBA(255, 232, 209, 1.00)
+    padding-top: 10px
+    padding-bottom: 10px
+    .repeater
+        display: flex
+        justify-content: space-between
+        .articleWrapperDiv
+            text-align: center
+            margin-top: 10px
+            margin: 10px
+            padding: 30px 20px 30px 20px
+            line-height: 1.2em
+            // colors
+            background-color: rgba(71, 187, 179, 1.00)
+            box-shadow: 8px 5px 5px rgba(0, 0, 0, 0.44)
 
 a
-    color: RGBA(242, 239, 234, 1.00)
+    color: rgba(242, 239, 234, 1.00)
     text-decoration: inherit
     font-weight: inherit
-
-.articleWrapperDiv
-    padding-left: 10px
-    margin-top: 10px
-    background-color: RGBA(71, 187, 179, 1.00)
-    // border-color: RGBA(46, 94, 170, 1.00)
-    // border-bottom: solid
-    // border-top: solid

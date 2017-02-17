@@ -265,41 +265,47 @@ td,
 th {
   padding: 0; }
 
-/* line 7, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+/* line 5, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+body {
+  line-height: 1.2em; }
+
+/* line 8, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
 .header {
-  background-color: RGBA(71, 187, 179, 1);
-  height: 50px;
-  top: 0;
-  left: 0; }
-  /* line 12, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+  background-color: #47bbb3;
+  height: auto; }
+  /* line 11, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
   .header .Title {
-    position: relative;
     text-align: center;
-    vertical-align: middle;
-    line-height: 50px;
     font-family: "Abril Fatface", "Times New Roman" , serif;
     font-size: 40px;
-    letter-spacing: .07em;
-    color: RGBA(242, 239, 234, 1); }
+    line-height: 2em;
+    color: #f2efea; }
 
-/* line 22, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+/* line 18, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
 .container {
   font-family: "Open Sans", "Arial", sans-serif;
   font-size: 20px;
-  line-height: 50px;
-  background-color: RGBA(255, 232, 209, 1); }
+  padding-top: 10px;
+  padding-bottom: 10px; }
+  /* line 23, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+  .container .repeater {
+    display: flex;
+    justify-content: space-between; }
+    /* line 26, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+    .container .repeater .articleWrapperDiv {
+      text-align: center;
+      margin-top: 10px;
+      margin: 10px;
+      padding: 30px 20px 30px 20px;
+      line-height: 1.2em;
+      background-color: #47bbb3;
+      box-shadow: 8px 5px 5px rgba(0, 0, 0, 0.44); }
 
-/* line 28, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+/* line 36, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
 a {
-  color: RGBA(242, 239, 234, 1);
+  color: #f2efea;
   text-decoration: inherit;
   font-weight: inherit; }
-
-/* line 33, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-.articleWrapperDiv {
-  padding-left: 10px;
-  margin-top: 10px;
-  background-color: RGBA(71, 187, 179, 1); }
 
 /* line 4, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_flyingfocus.sass */
 #flying-focus {
