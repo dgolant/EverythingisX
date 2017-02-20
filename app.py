@@ -176,14 +176,45 @@ def bad_news():
     lines = None
     row_list = []
     with engine.connect() as conn:
-        select_statement = articles_table.select().where(
-            articles_table.c.polarity < 0
-        ).group_by(
-            articles_table.c.article_id,
-            articles_table.c.title
+        distinct_article_id_table = (
+            select(
+                [articles_table.c.article_id]
+            ).distinct(
+                articles_table.c.title
+            )
+        ).alias('da')
+        joined_id_articles_tbl = join(
+            articles_table,
+            distinct_article_id_table,
+            articles_table.c.article_id == distinct_article_id_table.c.article_id
+        )
+        select_statement = select(
+            [
+                articles_table.c.article_id,
+                articles_table.c.title,
+                articles_table.c.author,
+                articles_table.c.url,
+                articles_table.c.url_to_image,
+                articles_table.c.sentiment,
+                articles_table.c.description,
+                articles_table.c.publish_time,
+                articles_table.c.polarity,
+                articles_table.c.subjectivity,
+                articles_table.c.time_created
+            ]
+        ).select_from(
+            joined_id_articles_tbl
+        ).where(
+            and_(
+                articles_table.c.polarity < -0.1,
+                articles_table.c.subjectivity < 0.5,
+                articles_table.c.publish_time is not None,
+                articles_table.c.publish_time.isnot(None),
+                articles_table.c.publish_time != None,
+            )
         ).order_by(
+            articles_table.c.publish_time.desc(),
             articles_table.c.time_created.desc(),
-            articles_table.c.publish_time.desc()
         )
         result_set = conn.execute(select_statement)
         # building a dict that can be manipulated from the result set
@@ -239,9 +270,6 @@ def good_news():
             articles_table.c.publish_time.desc(),
             articles_table.c.time_created.desc(),
         )
-
-
-        print(select_statement.compile(dialect=postgresql.dialect()))
         result_set = conn.execute(select_statement)
         # building a dict that can be manipulated from the result set
         for row in result_set:
@@ -258,7 +286,12 @@ def good_news_page():
         'views/goodnews.html'
     )
 
-
+@app.route('/badnews')
+def bad_news_page():
+    root_dir = os.path.dirname(os.getcwd())
+    return app.send_static_file(
+        'views/badnews.html'
+    )
 
 def fetch_articles_and_save():
     news_json_array = get_multisource_news_array(newsSources, "top")

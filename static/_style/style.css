@@ -266,67 +266,126 @@ th {
   padding: 0; }
 
 /* line 5, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-body {
+body.goodnews {
   line-height: 1.2em; }
+  /* line 7, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+  body.goodnews .header {
+    background-color: #2baf49;
+    height: auto;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.44); }
+    /* line 11, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+    body.goodnews .header .Title {
+      text-align: center;
+      font-family: "Abril Fatface", "Times New Roman" , serif;
+      font-size: 40px;
+      line-height: 2em;
+      color: #f2efea; }
+  /* line 18, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+  body.goodnews .container {
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    padding: 20px 50px 0px 50px; }
+    /* line 22, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+    body.goodnews .container .repeater {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap; }
+      /* line 26, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+      body.goodnews .container .repeater .articleWrapperDiv {
+        background-color: #2baf49;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.44);
+        margin: 0px 10px 20px 10px;
+        max-width: 20%; }
+        /* line 32, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+        body.goodnews .container .repeater .articleWrapperDiv .articleImageWrapper {
+          height: auto;
+          width: auto; }
+          /* line 35, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+          body.goodnews .container .repeater .articleWrapperDiv .articleImageWrapper:hover {
+            filter: blur(10px); }
+          /* line 37, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+          body.goodnews .container .repeater .articleWrapperDiv .articleImageWrapper .articleImage {
+            max-width: 100%;
+            max-height: 100%; }
+            /* line 40, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+            body.goodnews .container .repeater .articleWrapperDiv .articleImageWrapper .articleImage:hover {
+              filter: saturate(1.5); }
+        /* line 42, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+        body.goodnews .container .repeater .articleWrapperDiv .articleDiv {
+          text-align: center;
+          margin-top: 10px;
+          margin: 10px;
+          padding: 30px 20px 30px 20px;
+          line-height: 1.2em; }
+  /* line 49, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+  body.goodnews a {
+    color: #f2efea;
+    text-decoration: inherit;
+    font-weight: inherit; }
+    /* line 53, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
+    body.goodnews a:hover {
+      background-color: rgba(255, 255, 255, 0.33); }
 
-/* line 8, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-.header {
-  background-color: #47bbb3;
-  height: auto; }
-  /* line 11, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-  .header .Title {
-    text-align: center;
-    font-family: "Abril Fatface", "Times New Roman" , serif;
-    font-size: 40px;
-    line-height: 2em;
-    color: #f2efea; }
-
-/* line 18, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-.container {
-  font-family: "Open Sans", "Arial", sans-serif;
-  font-size: 20px;
-  padding: 20px 50px 0px 50px; }
-  /* line 22, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-  .container .repeater {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; }
-    /* line 26, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-    .container .repeater .articleWrapperDiv {
-      background-color: #47bbb3;
-      box-shadow: 8px 5px 5px rgba(0, 0, 0, 0.44);
-      margin: 0px 10px 20px 10px;
-      max-width: 20%; }
-      /* line 32, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-      .container .repeater .articleWrapperDiv .articleImageWrapper {
-        height: auto;
-        width: auto; }
-        /* line 35, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-        .container .repeater .articleWrapperDiv .articleImageWrapper:hover {
-          filter: blur(10px); }
-        /* line 37, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-        .container .repeater .articleWrapperDiv .articleImageWrapper .articleImage {
-          max-width: 100%;
-          max-height: 100%; }
-          /* line 40, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-          .container .repeater .articleWrapperDiv .articleImageWrapper .articleImage:hover {
-            filter: saturate(1.5); }
-      /* line 42, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-      .container .repeater .articleWrapperDiv .articleDiv {
-        text-align: center;
-        margin-top: 10px;
-        margin: 10px;
-        padding: 30px 20px 30px 20px;
-        line-height: 1.2em; }
-
-/* line 49, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-a {
-  color: #f2efea;
-  text-decoration: inherit;
-  font-weight: inherit; }
-  /* line 53, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisgood.sass */
-  a:hover {
-    background-color: rgba(255, 255, 255, 0.33); }
+/* line 5, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+body.badnews {
+  line-height: 1.2em; }
+  /* line 7, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+  body.badnews .header {
+    background-color: #af2b38;
+    height: auto;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.44); }
+    /* line 11, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+    body.badnews .header .Title {
+      text-align: center;
+      font-family: "Abril Fatface", "Times New Roman" , serif;
+      font-size: 40px;
+      line-height: 2em;
+      color: #f2efea; }
+  /* line 18, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+  body.badnews .container {
+    font-family: "Open Sans", "Arial", sans-serif;
+    font-size: 20px;
+    padding: 20px 50px 0px 50px; }
+    /* line 22, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+    body.badnews .container .repeater {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap; }
+      /* line 26, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+      body.badnews .container .repeater .articleWrapperDiv {
+        background-color: #af2b38;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.44);
+        margin: 0px 10px 20px 10px;
+        max-width: 20%; }
+        /* line 32, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+        body.badnews .container .repeater .articleWrapperDiv .articleImageWrapper {
+          height: auto;
+          width: auto; }
+          /* line 35, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+          body.badnews .container .repeater .articleWrapperDiv .articleImageWrapper:hover {
+            filter: blur(10px); }
+          /* line 37, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+          body.badnews .container .repeater .articleWrapperDiv .articleImageWrapper .articleImage {
+            max-width: 100%;
+            max-height: 100%; }
+            /* line 40, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+            body.badnews .container .repeater .articleWrapperDiv .articleImageWrapper .articleImage:hover {
+              filter: saturate(1.5); }
+        /* line 42, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+        body.badnews .container .repeater .articleWrapperDiv .articleDiv {
+          text-align: center;
+          margin-top: 10px;
+          margin: 10px;
+          padding: 30px 20px 30px 20px;
+          line-height: 1.2em; }
+  /* line 49, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+  body.badnews a {
+    color: #f2efea;
+    text-decoration: inherit;
+    font-weight: inherit; }
+    /* line 53, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_everythingisbad.sass */
+    body.badnews a:hover {
+      background-color: rgba(255, 255, 255, 0.33); }
 
 /* line 4, /Users/Dan/Desktop/CodeProjects/EverythingIsX/static/_sass/_flyingfocus.sass */
 #flying-focus {
