@@ -5,7 +5,7 @@ A WIP version is available at everything-is-x.herokuapp.com, but the current sen
 
 ##TODO
 * [ ] Functional TODOS:
-  1. [ ] Manually classify the existing local corpus I have for use by the SVM
+  1. [x] ~~Manually classify the existing local corpus I have for use by the SVM~~
   1. [ ] Build a training set from the manually classified corpus
   1. [ ] Pull in extra training set data from manually filtered sources such as /r/UpliftingNews, /r/MorbidReality, etc.
   1. [ ] Implement training functionality for a sklearn SVM
