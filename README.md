@@ -29,7 +29,7 @@ A WIP version is available at everything-is-x.herokuapp.com, but the current sen
     * [ ] this will involve updating the UI to include a feedback mechanism, a route to update a CSV of disputed classifications, and a mechanism to update the training CSVs. 
 
 ##Acknowledgments
-  Big thanks to the following:
-    Jared for all his help with styling
-    Jason for all his Python mentoring
-    Shruti for the idea to use subreddits for training data
+### Big thanks to the following:
+  * Jared for all his help with styling
+  * Jason for all his Python mentoring
+  * Shruti for the idea to use subreddits for training data
