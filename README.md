@@ -2,14 +2,15 @@
 A project that pulls in Headlines, grades their sentiment, and outputs two webpages.  I am hoping to observe the effect that our constant inundation with negative news is creating. 
 
 A WIP version is available at everything-is-x.herokuapp.com, but the current sentiment classification is done through TextBlob and is, in my opinion, insufficient.
+As of March 5th, 2017, manually collected/classified training data was brought in from the existing corpus the app had collected in February and the subreddits /r/UpliftingNews and /r/feelbadnews.
 
 ##TODO
 * [ ] Functional TODOS:
   1. [x] ~~Manually classify the existing local corpus I have for use by the SVM~~
-  1. [ ] Build a training set from the manually classified corpus
-  1. [ ] Pull in extra training set data from manually filtered sources such as /r/UpliftingNews, /r/MorbidReality, etc.
-  1. [ ] Implement training functionality for a sklearn SVM
-  1. [ ] Implement a testing functionality for the SVM
+  1. [x] ~~Build a training set from the manually classified corpus~~
+  1. [x] ~~Pull in extra training set data from manually filtered sources such as /r/UpliftingNews, /r/MorbidReality, etc.~~
+  1. [x] ~~Implement training functionality for a sklearn SVM~~
+  1. [x] ~~Implement a testing functionality for the SVM~~
   1. [ ] Implement writing the results of the SVM to database
   1. [ ] Schedule ML classification 
   1. [ ] Consume the ML rating in the UI
