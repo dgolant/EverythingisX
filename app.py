@@ -1,21 +1,37 @@
-import requests
+# Sentiment / ML
+from textblob import TextBlob
+from pandas import DataFrame
+import numpy
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+
+# operation
+from apscheduler.schedulers.background import BackgroundScheduler
+
+# utility
+from datetime import datetime
+from ast import literal_eval
 import simplejson as json
-from flask import Flask
+
+# database creation / manipulation
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.sql import and_, or_, not_, select, join
 from sqlalchemy import text
 from sqlalchemy.dialects import postgresql
-from datetime import datetime
 from contextlib import contextmanager
-from apscheduler.schedulers.background import BackgroundScheduler
+from flask_sqlalchemy import SQLAlchemy
+import psycopg2
+
+# networking/requests/routing/server
+import requests
+from flask import Flask
+from flask_heroku import Heroku
 import coloredlogs
 import logging
-from textblob import TextBlob
-from ast import literal_eval
-import psycopg2
-from flask_heroku import Heroku
-from flask_sqlalchemy import SQLAlchemy
 import os
+import sys
+
 
 
 
@@ -26,7 +42,7 @@ app = Flask(__name__)
 app._static_folder = os.path.abspath("static/")
 heroku = Heroku(app)
 db = SQLAlchemy(app)
-
+NEWLINE = '\n'
 
 # Helpers
 def load_config_settings():
@@ -41,7 +57,16 @@ def load_config_settings():
 # Settings
 settings = load_config_settings()
 news_api_key = settings["news_api_key"]
-
+TRAINING_FILES = [
+        {
+            'file_name':'positive_headlines.csv',
+            'class': 1
+        },
+        {
+            'file_name':'negative_headlines.csv',
+            'class': -1
+        }
+    ]
 
 newsSources = [
     'associated-press',
@@ -92,7 +117,15 @@ else:
 
 
 engine = create_engine(CONNECTION_STRING, pool_recycle=3600)
-connection = engine.connect()
+
+try:
+    connection = engine.connect()
+except Exception as exc:
+    print(
+            "Connection is Empty, please start the EverythingIsX AppDB" 
+            "ERROR DETAIL: {}".format(exc)
+        )
+    sys.exit()
 meta = MetaData(engine)
 articles_table = Table(
     'Articles',
@@ -100,6 +133,62 @@ articles_table = Table(
     autoload=True,
     autoload_with=engine
 )
+
+
+def read_csv(file_name):
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(dir_path,'resources', file_name)
+    print("FILEPATH----------{}".format(file_path))
+    if os.path.isfile(file_path):
+        lines = []
+        f = open(file_path, encoding="latin-1")
+        for line in f:
+            lines.append(line)
+        f.close()
+        return lines
+    else:
+        print("You have supplied an invalid path for your CSV")
+
+
+def build_data_frame(files):
+    rows = []
+    index = []
+    i = 0
+    for file in files:
+        for line in read_csv(file['file_name']):
+            rows.append({'text': line, 'class': file['class']})
+            index.append(i)
+            i += 1
+    data_frame = DataFrame(rows, index=index)
+    return data_frame
+
+
+def dataframe_from_csv_files(files):
+    data = DataFrame({'text' : [], 'class' : [] })
+    data = data.append(build_data_frame(files))
+    data = data.reindex(numpy.random.permutation(data.index))
+    return data
+
+
+def train_machine_return_classifier_and_vectorizer(data_files):
+        data = dataframe_from_csv_files(data_files)
+        count_vectorizer = CountVectorizer()
+        counts = count_vectorizer.fit_transform(data['text'].values)
+        classifier = MultinomialNB()
+        targets = data['class'].values
+        classifier.fit(counts, targets)
+        # examples = [
+        #     "Pedophile raped baby until she bled "
+        #     "and got a slap on the wrist",
+        #     "ESPN just released a Video Story about Arthur "
+        #     "the stray dog who followed a Swedish extreme sports "
+        #     "team along a 430 mile race"
+        # ]
+        # example_counts = count_vectorizer.transform(examples)
+        # predictions = classifier.predict(example_counts)
+        return count_vectorizer, classifier
+
+
 
 
 @contextmanager
@@ -392,6 +481,8 @@ sched.add_job(
 
 
 sched.start()
+# global_count_vectorizer, global_classifier = train_machine_return_classifier_and_vectorizer(TRAINING_FILES)
+# import ipdb; ipdb.set_trace()
 
 if __name__ == '__main__':
     app.run()
