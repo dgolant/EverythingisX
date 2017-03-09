@@ -11,6 +11,8 @@ As of March 5th, 2017, manually collected/classified training data was brought i
   1. [x] ~~Pull in extra training set data from manually filtered sources such as /r/UpliftingNews, /r/MorbidReality, etc.~~
   1. [x] ~~Implement training functionality for a sklearn SVM~~
   1. [x] ~~Implement a testing functionality for the SVM~~
+  1. [ ] Add a unit testing framework (tox/ nosetest, needs research)
+  1. [ ] Implement classification pipelining.
   1. [ ] Implement writing the results of the SVM to database
   1. [ ] Schedule ML classification 
   1. [ ] Consume the ML rating in the UI
