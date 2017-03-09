@@ -4,6 +4,11 @@ from pandas import DataFrame
 import numpy
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
+from sklearn.cross_validation import KFold
+from sklearn.metrics import confusion_matrix, f1_score
+from sklearn.feature_extraction.text import TfidfTransformer
+
 
 
 # operation
@@ -135,6 +140,13 @@ articles_table = Table(
 )
 
 
+###############################
+#                             #
+#       ML RELATED CODE       #
+#                             #
+###############################
+
+
 def read_csv(file_name):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     file_path = os.path.join(dir_path,'resources', file_name)
@@ -170,9 +182,9 @@ def dataframe_from_csv_files(files):
     return data
 
 
-def train_machine_return_classifier_and_vectorizer(data_files):
+def train_machine_return_pipeline(data_files):
         data = dataframe_from_csv_files(data_files)
-        count_vectorizer = CountVectorizer()
+        count_vectorizer = CountVectorizer(ngram_range=(1, 7))
         counts = count_vectorizer.fit_transform(data['text'].values)
         classifier = MultinomialNB()
         targets = data['class'].values
@@ -186,8 +198,56 @@ def train_machine_return_classifier_and_vectorizer(data_files):
         # ]
         # example_counts = count_vectorizer.transform(examples)
         # predictions = classifier.predict(example_counts)
-        return count_vectorizer, classifier
+        pipeline = Pipeline(
+            [
+                ('vectorizer',  count_vectorizer),
+                #('tfidf_transformer',  TfidfTransformer()),
+                # Removing above line tunes accuracy, but unclear how
+                ('classifier',  classifier)
+            ]
+        )
+        return pipeline, data, count_vectorizer
 
+# This function can be used to validate tuning of the model
+def k_fold_crossvalidate(data, pipeline):
+    k_fold = KFold(n=len(data), n_folds=6)
+    scores = []
+    confusion = numpy.array([[0, 0], [0, 0]])
+    for train_indices, test_indices in k_fold:
+        train_text = data.iloc[train_indices]['text'].values
+        train_y = data.iloc[train_indices]['class'].values
+
+        test_text = data.iloc[test_indices]['text'].values
+        test_y = data.iloc[test_indices]['class'].values
+
+        pipeline.fit(train_text, train_y)
+        predictions = pipeline.predict(test_text)
+        print(predictions)
+        confusion += confusion_matrix(test_y, predictions)
+        score = f1_score(test_y, predictions, pos_label=1)
+        scores.append(score)
+
+    print('Total headlines classified:', len(data))
+    print('Score:', sum(scores)/len(scores))
+    print('Confusion matrix:')
+    print(confusion)
+    # import ipdb; ipdb.set_trace()
+
+
+global_pipeline, global_data, global_vectorizer = train_machine_return_pipeline(TRAINING_FILES)
+examples = [
+    "Pedophile raped baby until she bled "
+    "and got a slap on the wrist",
+    "ESPN just released a Video Story about Arthur "
+    "the stray dog who followed a Swedish extreme sports "
+    "team along a 430 mile race"
+]
+# import ipdb; ipdb.set_trace();
+# example_counts = global_vectorizer.transform(examples)
+# predictions = global_pipeline.predict(example_counts)
+# print("Prediction: {}".format(predictions))
+dataTest = dataframe_from_csv_files(TRAINING_FILES)
+k_fold_crossvalidate(dataTest, global_pipeline)
 
 
 
@@ -481,7 +541,7 @@ sched.add_job(
 
 
 sched.start()
-# global_count_vectorizer, global_classifier = train_machine_return_classifier_and_vectorizer(TRAINING_FILES)
+# global_pipeline = train_machine_return_pipeline(TRAINING_FILES)
 # import ipdb; ipdb.set_trace()
 
 if __name__ == '__main__':
