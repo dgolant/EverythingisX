@@ -127,7 +127,7 @@ try:
     connection = engine.connect()
 except Exception as exc:
     print(
-            "Connection is Empty, please start the EverythingIsX AppDB" 
+            "Connection is Empty, please start the EverythingIsX AppDB"
             "ERROR DETAIL: {}".format(exc)
         )
     sys.exit()
@@ -231,21 +231,25 @@ def k_fold_crossvalidate(data, pipeline):
     print('Score:', sum(scores)/len(scores))
     print('Confusion matrix:')
     print(confusion)
+    return pipeline
     # import ipdb; ipdb.set_trace()
 
 
 global_pipeline, global_data, global_vectorizer = train_machine_return_pipeline(TRAINING_FILES)
 examples = [
-    "Pedophile punched baby until she bled "
+    "Pedophile raped baby until she bled "
     "and got a slap on the wrist",
     "ESPN just released a Video Story about Arthur "
     "the stray dog who followed a Swedish extreme sports "
-    "team along a 435 mile race"
+    "team along a 430 mile race"
 ]
-# import ipdb; ipdb.set_trace();
-# example_counts = global_vectorizer.transform(examples)
-# predictions = global_pipeline.predict(example_counts)
-# print("Prediction: {}".format(predictions))
+
+example_counts = global_vectorizer.transform(examples)
+global_pipeline = k_fold_crossvalidate(global_data, global_pipeline)
+
+predictions = global_pipeline.predict(examples)
+print("Prediction: {}".format(predictions))
+import ipdb; ipdb.set_trace();
 dataTest = dataframe_from_csv_files(TRAINING_FILES)
 k_fold_crossvalidate(dataTest, global_pipeline)
 
